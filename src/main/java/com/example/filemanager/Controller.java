@@ -64,7 +64,35 @@ public class Controller implements Initializable {
     }
 
     public void btnMoveAction(ActionEvent actionEvent) {
+        PanelController leftPC = (PanelController) leftPanel.getProperties().get("ctrl");
+        PanelController rightPC = (PanelController) rightPanel.getProperties().get("ctrl");
 
+        if(leftPC.getSelectedFilename() == null && rightPC.getSelectedFilename() == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error!", ButtonType.OK);
+            alert.showAndWait();
+            return;
+        }
+
+        PanelController srcPC = null, dstPC = null;
+        if(leftPC.getSelectedFilename() != null){
+            srcPC = leftPC;
+            dstPC = rightPC;
+        }
+        if(rightPC.getSelectedFilename() != null){
+            srcPC = rightPC;
+            dstPC = leftPC;
+        }
+
+        Path srcPath = Paths.get(srcPC.getCurrentPath(), srcPC.getSelectedFilename());
+        Path dstPath = Paths.get(dstPC.getCurrentPath()).resolve(srcPath.getFileName().toString());
+
+        try {
+            Files.move(srcPath, dstPath);
+            dstPC.updateList(Paths.get(dstPC.getCurrentPath()));
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error!", ButtonType.OK);
+            alert.showAndWait();
+        }
     }
 
     public void btnDeleteAction(ActionEvent actionEvent) {
