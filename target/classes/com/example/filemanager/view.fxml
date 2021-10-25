@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TableView?>
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.filemanager.Controller">
+
+   <MenuBar>
+       <Menu text="File">
+           <MenuItem text="Exit" onAction="#btnExitAction"/>
+       </Menu>
+   </MenuBar>
+
+    <HBox VBox.vgrow="ALWAYS" spacing="5">
+        <fx:include fx:id="leftPanel" source="panel.fxml" HBox.hgrow="ALWAYS"/>
+        <fx:include fx:id="rightPanel" source="panel.fxml" HBox.hgrow="ALWAYS"/>
+    </HBox>
+
+   <HBox spacing="5">
+
+       <Button maxWidth="Infinity" text="Copy" HBox.hgrow="ALWAYS" focusTraversable="false" onAction="#btnCopyAction"/>
+       <Button maxWidth="Infinity" text="Move" HBox.hgrow="ALWAYS" focusTraversable="false" onAction="#btnMoveAction"/>
+       <Button maxWidth="Infinity" text="Delete" HBox.hgrow="ALWAYS" focusTraversable="false" onAction="#btnDeleteAction"/>
+       <Button maxWidth="Infinity" text="Rename" HBox.hgrow="ALWAYS" focusTraversable="false" onAction="#btnRenameAction"/>
+
+       <padding>
+           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+       </padding>
+   </HBox>
+</VBox>
